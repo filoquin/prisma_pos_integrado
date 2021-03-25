@@ -25,19 +25,3 @@ print(p.pos_execute('PRI'))
 """
 
 #print(p.pos_execute('CIE'))
-"""
-app = Flask(__name__)
-api = Api(app)
-
-
-class tes(Resource):
-
-    def get(self):
-        return 'oki'
-
-
-api.add_resource(tes, '/tes')  # Route_1
-
-if __name__ == '__main__':
-    app.run(port='5002')
-"""

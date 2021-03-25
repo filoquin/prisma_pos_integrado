@@ -4,7 +4,9 @@ import serial.tools.list_ports
 import binascii
 import curses.ascii
 import logging
-from plot_data import plots
+from . import plot_data
+plots = plot_data.plots 
+#from plot_data import plots
 logging.basicConfig(level=logging.DEBUG)
 
 
