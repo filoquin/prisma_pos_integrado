@@ -10,7 +10,7 @@ print(p.pos_execute('TES'))
 #print(p.pos_execute('CIE')) #Error a reintentar cerrar 
 """
 
-print(p.pos_execu   te('VEN', amount=300, invoice=1, instaments=1, tip=0,
+print(p.pos_execute('VEN', amount=300, invoice=1, instaments=1, tip=0,
                     card_code='VI', plan=0,commerce='03659307',
                     commerce_name='pruebas', cuit='00-00000000-0', line_mode='\x01'))
 """
