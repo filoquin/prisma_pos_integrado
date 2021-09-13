@@ -1,8 +1,9 @@
 from pos_integrado import posIntegrado
 from flask import Flask, request, jsonify, render_template
 from flask_restful import Resource, Api, reqparse
-
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app, resources={r"/*":{"origins":"*"}})
 api = Api(app)
 
 parser = reqparse.RequestParser()
@@ -34,6 +35,20 @@ def shutdown():
     shutdown_server()
     return 'Server shutting down...'
     
+def restart_server():
+    func = request.environ.get('werkzeug.server.restart')
+    if func is None:
+        raise RuntimeError('Not running with the Werkzeug Server')
+    func()
+    
+@app.route('/restart', methods=['GET'])
+def restart():
+    shutdown_server()
+    p = posIntegrado()
+    p.auto_select_port()
+    app.run(host='0.0.0.0',port='5002')
+    return 'Server restart...'
+
 
 
 class tes(Resource):
@@ -68,7 +83,7 @@ class ven(Resource):
     
     def post(self):
         args = parser.parse_args()
-
+        print(args)
         amount = int(args['amount'] * 100)
         invoice = args['invoice']
         instaments = args['instaments']
@@ -95,5 +110,5 @@ api.add_resource(ven, '/ven')
 if __name__ == '__main__':
     p = posIntegrado()
     p.auto_select_port()
-    app.run(port='5002')
+    app.run(host='0.0.0.0',port='5002')
 # Para obtener sabana de enviar CIE y ULT CIE en orden
