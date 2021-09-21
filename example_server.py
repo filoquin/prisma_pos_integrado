@@ -56,6 +56,11 @@ class tes(Resource):
     def get(self):
         return p.pos_execute('TES')
 
+class cie(Resource):
+
+    def get(self):
+        return p.pos_execute('CIE')
+
 
 class tar(Resource):
 
@@ -93,11 +98,15 @@ class ven(Resource):
         commerce = args['commerce']
         commerce_name = args['commerce_name']
         cuit = args['cuit']
-        line_mode = args['line_mode']
+        if args['line_mode']  == 0:
+            line_mode ='\x00'
+        else:
+            line_mode ='\x01'
+
 
         return p.pos_execute('VEN', amount=amount, invoice=invoice, instaments=instaments, tip=tip,
                     card_code=card_code, plan=plan,commerce=commerce,
-                    commerce_name=commerce_name, cuit=cuit, line_mode='\x01')        
+                    commerce_name=commerce_name, cuit=cuit, line_mode=line_mode)        
 
 api.add_resource(tes, '/test')
 api.add_resource(close, '/close')
@@ -105,6 +114,7 @@ api.add_resource(list_ports, '/list_ports')
 api.add_resource(tar, '/tar/<tar_id>')
 api.add_resource(ulc, '/ulc/<tar_id>')
 api.add_resource(ven, '/ven')
+api.add_resource(cie, '/cie')
 
 
 if __name__ == '__main__':
