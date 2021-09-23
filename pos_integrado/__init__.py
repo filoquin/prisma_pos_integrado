@@ -7,7 +7,7 @@ import logging
 from . import plot_data
 plots = plot_data.plots 
 #from plot_data import plots
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 
@@ -91,15 +91,15 @@ class posIntegrado(object):
     def serial_write(self, text):
         assert isinstance(text, str), 'text must be a string'
         raw = text.encode()
-        logging.info("%s raw send to terminal" % raw)
-        logging.info("%s send to terminal" % text)
+        logging.debug("%s raw send to terminal" % raw)
+        logging.debug("%s send to terminal" % text)
         self.ser_connection.write(raw)
 
     def serial_read(self, size=1):
         raw = self.ser_connection.read(size)
         msg = raw.decode('ascii')
-        logging.info("%s raw received from terminal" % raw)
-        logging.info("%s received from terminal" % msg)
+        logging.debug("%s raw received from terminal" % raw)
+        logging.debug("%s received from terminal" % msg)
         return msg
 
     def makeComand(self, command, params=''):
@@ -136,7 +136,7 @@ class posIntegrado(object):
         self.ser_connection.read(1)
         if line == b'\x06':
             return line
-        return self.rtn_parce_dict(line,plots[cmd_name]['res_start'], plots[cmd_name]['res_matrix'])
+        return self.rtn_parce_dict(line, plots[cmd_name]['res_start'], plots[cmd_name]['res_matrix'])
 
 
     def rtn_parce_dict(self, res, start, matrix):

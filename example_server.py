@@ -66,7 +66,14 @@ def restart():
 class tes(Resource):
 
     def get(self):
-        return p.pos_execute('TES')
+        try:
+            res = p.pos_execute('TES')
+            if res == {}:
+                return True
+            else:
+                return False
+        except Exception as e:
+            return False
 
 
 class imt(Resource):
@@ -86,13 +93,15 @@ class z(Resource):
     def get(self):
         res = {'cie': False, 'Z': []}
         res['cie'] = p.pos_execute('CIE')
-        last = False
+        last = ''
         for i in range(0, 6):
             try:
                 ulc = p.pos_execute('ULC', index=i)
-                if ulc != last:
-                    res['Z'].append(p.pos_execute('ULC', index=i))
-                last = ulc
+                if ulc:
+                    if 'card_code' in ulc and ulc['card_code'] != last:
+                        res['Z'].append(ulc)
+                        last = ulc['card_code']
+                p.serial_write(p.OKIDOKI)
             except Exception as e:
                 break
         return res
