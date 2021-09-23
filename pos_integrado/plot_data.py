@@ -11,6 +11,30 @@ plots = {
         'res_matrix':  [
         ]
     },
+    'IMT': {
+        'name': 'Reimpresion ultima transaccion',
+        'method': 'pos_execute',
+        'cmd': 'IMT',
+        'cmd_args': [
+        ],
+        'res_start': 5,
+        'send_param_len': False,
+
+        'res_matrix':  [
+        ]
+    },
+    'IMC': {
+        'name': 'Reimpresion ultimo cierre',
+        'method': 'pos_execute',
+        'cmd': 'IMC',
+        'cmd_args': [
+        ],
+        'res_start': 5,
+        'send_param_len': False,
+
+        'res_matrix':  [
+        ]
+    },
     'VEN': {
         'name': 'Venta',
         'method': 'pos_execute',
@@ -148,6 +172,32 @@ plots = {
         ]
     },
     'ULC': {
+        'name': 'Último Cierre',
+        'method': 'pos_execute',
+        'cmd': 'ULC',
+        'cmd_args': [
+            ('index', 'N', '{:0>4}'),
+        ],
+        'res_start': 10,        
+        'res_matrix':  [
+            ('index', 0, 4, 'N'),
+            ('pros_code', 4, 3, 'A'),
+            ('lot', 7, 3, 'N'),
+            ('card_code', 10, 3, 'A'),
+            ('sale_quant', 13, 4, 'N'),
+            ('sale_amount', 17, 12, 'N'),
+            ('void_quant', 29, 4, 'N'),
+            ('void_amount', 33, 12, 'N'),
+            ('dev_quant', 45, 4, 'n'),
+            ('dev_amount', 49, 12, 'N'),
+            ('an_dev_quant', 61, 4, 'N'),
+            ('an_dev_amount', 65, 12, 'N'),
+            ('date', 77, 10, 'A'),
+            ('time', 87, 8, 'A'),
+            ('terminal_id', 95, 8, 'N'),
+        ]
+    },
+    'UvC': {
         'name': 'Último Commando',
         'method': 'pos_execute',
         'cmd': 'ULC',

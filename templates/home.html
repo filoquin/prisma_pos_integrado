@@ -1,91 +1,85 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Prisma Pos Integrado</title>
-  </head>
-  <body>
+</head>
+
+<body>
+            <nav class="navbar navbar-expand-lg navbar-light bg-info">
+                <a class="navbar-brand" href="#">Prisma Pos Integrado</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Conexión
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                <a class="dropdown-item"  target="code_emb" href="/test" >Test</a>
+                                <a class="dropdown-item"  target="code_emb" href="/list_ports" >Listar Puertos</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item"  target="code_emb" href="/restart" >Reiniciar</a>
+                                <a class="dropdown-item"  target="code_emb" href="/shutdown" >Apagar</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Tarjetas
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item"  target="code_emb" href="/tar/1" >Mastercard</a>
+                                <a class="dropdown-item"  target="code_emb" href="/tar/2" >Mastercar Debito</a>
+                                <a class="dropdown-item"  target="code_emb" href="/tar/3" >Visa</a>
+                                <a class="dropdown-item"  target="code_emb" href="/tar/4" >Visa Debito  </a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Operaciones
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item"  target="code_emb" href="/imc" >Reimprimir cierre</a>
+                                <a class="dropdown-item"  target="code_emb" href="/imt" >Reimprimir ticket</a>
+                                <a class="dropdown-item"  target="code_emb" href="/cie" >Cerrar</a>
+                                <a class="dropdown-item"  target="code_emb" href="/ulc/0" >Ultimo cierre</a>
+                                <a class="dropdown-item"  target="code_emb" href="/z" >Z</a>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
     <div class="container">
-      <div class="row">
-        <div class="col">
-          <h1>Prisma Pos Integrado</h1>
-        </div></div></div>
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-3">
-              <ul class="list-group">
-                <li class="list-group-item"><a href="list_ports">list ports</a></li>
-                <li class="list-group-item"><a href="tar/3">Visa Data</a></li>
-                <li class="list-group-item"><a href="ven">Last Transaction</a></li>
-                <li class="list-group-item"><a href="restart">restart</a></li>
-                <li class="list-group-item"><a href="shutdown">shutdown</a></li>
-              </ul>
-            </div>
+        <div class="row">
+
             <div class="col-sm-9">
-              <div id="loader"></div>
-              <form method="post" action="/ven">
-                <div class="form-row">
-                  <div class="col">
-                    <label for="card_code">card_code</label>
-                    <input type="text" class="form-control" id="card_code" name="card_code" value="IV"  placeholder="Enter card_code">
-                  </div>
-                  <div class="col">
-                    <label for="amount">amount</label>
-                    <input type="text" class="form-control" id="amount" name="amount" value="3.00"  placeholder="Enter amount">
-                  </div>
-                  <div class="col">
-                    <label for="instaments">instaments</label>
-                    <input type="text" class="form-control" id="instaments" name="instaments" value="1"  placeholder="Enter instaments">
-                  </div>
+                <div id="loader"></div>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" style="white-space: pre; background-color:#CCC;" name="code_emb" allowfullscreen></iframe>
                 </div>
-                <div class="form-row">
-                  <div class="col">
-                    <label for="invoice">invoice</label>
-                    <input type="text" class="form-control" id="invoice" name="invoice" value="1"  placeholder="Enter invoice">
-                  </div>
-                  <div class="col">
-                    <label for="plan">plan</label>
-                    <input type="text" class="form-control" id="plan" name="plan" value="0"  placeholder="Enter plan">
-                  </div>
-                  <div class="col">
-                    <label for="tip">tip</label>
-                    <input type="text" class="form-control" id="tip" name="tip" value="0.00"  placeholder="Enter tip">
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="col">
-                    <label for="cuit">cuit</label>
-                    <input type="text" class="form-control" id="cuit" name="cuit" value="00-00000000-0"  placeholder="Enter cuit">
-                  </div>
-                  <div class="col">
-                    <label for="commerce_name">commerce name</label>
-                    <input type="text" class="form-control" id="commerce_name" name="commerce_name" value="Test"  placeholder="Enter commerce_name">
-                  </div>
-                  <div class="col">
-                    <label for="commerce">commerce number</label>
-                    <input type="text" class="form-control" id="commerce" name="commerce" value="03659307"  placeholder="Enter commerce">
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="col">
-                    <label for="line_mode">line mode</label>
-                    <input type="text" class="form-control" id="line_mode" name="line_mode" value="00-00000000-0"  placeholder="Enter line_mode">
-                  </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-              </form>
             </div>
-          </div>
         </div>
-      </div>
-      <!-- Optional JavaScript -->
-      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    </body>
-  </html>
+    </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>

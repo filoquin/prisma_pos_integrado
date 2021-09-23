@@ -37,8 +37,10 @@ class posIntegrado(object):
         return self.ser_connection.isOpen()
 
     def close(self):
-        self.ser_connection.close()
-        return self.ser_connection.isOpen()
+        if self.ser_connection:
+            self.ser_connection.close()
+            return self.ser_connection.isOpen()
+        return False
 
     def auto_select_port(self,usb_id='1234:0101'):
         ports = self.list_ports()
@@ -129,7 +131,7 @@ class posIntegrado(object):
             cmd_name, args)
         self.serial_write(cmd)
         line = self.ser_connection.read_until(b'\x03')
-        print (line)
+        # print ("-> %r" % line)
         self.send_one_byte_signal('ACK')
         self.ser_connection.read(1)
         if line == b'\x06':
@@ -138,13 +140,13 @@ class posIntegrado(object):
 
 
     def rtn_parce_dict(self, res, start, matrix):
-        #print(res.decode('ascii'))
+        #print("-> %r" % res)
         ascii_res = res.decode('ascii')[start:]
         if ascii_res == self.ETX:
             return False
         res = {}
         for item in matrix:
-            #print(item)
+            # print(item)
             if item[3] == 'N':
                 res[item[0]] = int(ascii_res[item[1]:item[1]+item[2]])
             else:
